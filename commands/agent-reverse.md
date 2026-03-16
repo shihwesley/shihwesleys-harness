@@ -93,11 +93,13 @@ Install a capability from a previously analyzed source.
    - CRITICAL findings (remote exec, data exfil) → block install, show report, require `--force` to override
    - MEDIUM findings (secret access, persistence) → show findings, ask user to confirm
    - LOW findings (destructive ops, obfuscation) → show in report, proceed
-3. **Determine user-invocable status:**
+3. **Skill quality gate** — validate against the Anthropic skill guide (see Skill Quality Standard below)
+   - If the skill fails structural checks, fix before installing or warn the user
+4. **Determine user-invocable status:**
    - Source has `user-invocable: true` → install as `/command`
    - Source doesn't specify → ask: "Install as `/command` or agent-only skill?"
-4. Call `install_capability` with appropriate settings
-5. Report: files written, directory, whether `/command` is available
+5. Call `install_capability` with appropriate settings
+6. Report: files written, directory, whether `/command` is available
 
 **Example (clean install):**
 ```
@@ -282,6 +284,41 @@ Detect the current agent system:
 - `.cursor/` exists → `cursor`
 - `.agent/` exists → `antigravity`
 - Otherwise → ask user
+
+## Skill Quality Standard
+
+All skills — whether created, installed, or modified — must follow the Anthropic skill guide.
+
+**Canonical reference:** `shihwesleys-harness/references/anthropic-skill-guide.md`
+
+### Structure checklist (apply on install, create, or audit)
+
+1. **File naming**: `SKILL.md` (exact case) for directory-based skills. Folder names in kebab-case only.
+2. **Frontmatter**: `---` delimiters, `name` (kebab-case), `description` (WHAT it does + WHEN to use it, under 1024 chars). No XML angle brackets (`< >`) in frontmatter values unless quoted.
+3. **Progressive disclosure** (three levels):
+   - Level 1: YAML frontmatter — always loaded in system prompt. Enough for Claude to decide when to activate.
+   - Level 2: SKILL.md body — loaded when skill triggers. Core workflow instructions only.
+   - Level 3: `references/` and `scripts/` — loaded on demand. Detailed docs, specs, examples.
+4. **SKILL.md size**: Aim for under 150 lines. If over 200, split reference material into `references/`.
+5. **Instructions**: Specific and actionable. Include error handling. Reference bundled resources clearly.
+6. **No README.md** inside skill folders (README belongs in the repo).
+
+### When creating new skills
+
+Before writing any skill, read `shihwesleys-harness/references/anthropic-skill-guide.md` — specifically:
+- Chapter 2 (Planning and Design) for use case definition and success criteria
+- The "Technical requirements" section for frontmatter field rules
+- The "Best Practices for Instructions" section for writing style
+- Pattern 1-5 examples for structural inspiration
+
+Use `/create-skill-graph` when building navigation graphs that link multiple skills.
+
+### When installing external skills
+
+Run the structure checklist above. Common issues with third-party skills:
+- Bloated SKILL.md (everything inlined, no references/) — split before installing
+- Missing trigger conditions in description — add "Use when..." before installing
+- Unquoted special characters in YAML — fix frontmatter before installing
 
 ## Tips
 

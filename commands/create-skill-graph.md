@@ -12,6 +12,8 @@ Creates a navigable skill graph for a domain. Works from two sources:
 - **From research**: uses `~/.claude/research/<slug>/expertise.md` + `question-tree.md` to derive MOCs
 - **From existing files**: inventories `.claude/commands/`, `.claude/skills/`, `.claude/docs/` and clusters them
 
+**Before starting:** Read `shihwesleys-harness/references/anthropic-skill-guide.md` for the canonical skill structure rules. Skills linked from the graph must follow the Anthropic skill guide (progressive disclosure, frontmatter format, SKILL.md size limits). See the "Skill Quality Standard" section in `/agent-reverse` for the checklist.
+
 ## Step 1: Detect Source
 
 ```
@@ -119,6 +121,8 @@ After building the graph:
 Run the validation pattern (same as swift-graph-validate.sh but adapted):
 - Check all file references resolve
 - Check cross-references between MOCs are valid
+- Check linked skills follow Anthropic skill guide structure (frontmatter, progressive disclosure, SKILL.md size)
+- Flag any skill with SKILL.md over 200 lines or missing trigger conditions in description
 - Report any issues
 
 ## Step 6: Report
