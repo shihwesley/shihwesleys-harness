@@ -1,6 +1,6 @@
 ---
 name: mind-backup
-description: Backup and restore claude-brain .mv2 memory files to gist, local archive, or repo
+description: "Backup and restore claude-brain .mv2 memory files to gist, local archive, or repo. Use when user says /mind-backup, wants to save their memory state, restore from a backup, or migrate memory to a new machine."
 user-invocable: true
 allowed-tools: ["Bash"]
 ---

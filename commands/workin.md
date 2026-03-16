@@ -1,6 +1,6 @@
 ---
 name: workin
-description: Use when user wants to switch working directory to a project. Triggered by "/workin <project>". Does cd only — no exploration, no analysis, no file reading.
+description: "Use when user wants to switch working directory to a project. Triggered by \"/workin <project>\". Does cd only — no exploration, no analysis, no file reading."
 user-invocable: true
 allowed-tools: ["Bash"]
 ---

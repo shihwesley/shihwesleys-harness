@@ -1,6 +1,6 @@
 ---
 name: create-skill-graph
-description: "Create a skill graph for a domain — from research output or from existing skills/docs"
+description: "Create a skill graph for a domain — from research output or from existing skills/docs. Use when building navigation maps for skill collections, organizing domain knowledge, or creating MOC (Map of Content) indexes."
 argument-hint: "<domain-slug> [--from-research | --from-existing]"
 user-invocable: true
 ---

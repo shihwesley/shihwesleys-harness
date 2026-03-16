@@ -50,7 +50,7 @@ Navigate by reading this index, then following the MOC that matches your task. E
 
 ## Logging & Diagnostics
 
-- **Skill: `/swift-logging`** — os.Logger (Unified Logging), apple/swift-log (cross-platform), OSSignposter (Instruments intervals), OSLogStore (programmatic log export). Privacy annotations, level guide, Console.app/`log` CLI debugging. Reference files at `.claude/docs/swift-logging/`.
+- [[logging.md]] — Unified Logging (os.Logger), swift-log, OSSignposter, OSLogStore, privacy annotations, Console.app debugging.
 
 ## Tooling & Build
 
@@ -59,6 +59,8 @@ Navigate by reading this index, then following the MOC that matches your task. E
 ---
 
 ## Navigation Protocol
+
+- [[traverse.md]] — Full traversal protocol for agents. How to navigate MOCs with TLDR-integrated progressive disclosure, cost budgets, and rules.
 
 1. Read this index (you're here) — pick the MOC(s) matching your task
 2. Read the MOC — pick the specific skills/docs you need

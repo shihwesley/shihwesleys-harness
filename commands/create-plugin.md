@@ -1,7 +1,7 @@
 ---
 name: create-plugin
 description: Create or audit Claude Code plugins. Use --audit to analyze an existing plugin against quality standards.
-argument-hint: [description] or --audit [path]
+argument-hint: "[description] or --audit [path]"
 allowed-tools: ["Read", "Write", "Grep", "Glob", "Bash", "TodoWrite", "AskUserQuestion", "Skill", "Task"]
 ---
 
