@@ -5,6 +5,23 @@ All notable changes to shihwesleys-harness will be documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/).
 Versioning follows [Conventional Commits](https://www.conventionalcommits.org/) via `/release`.
 
+## [1.1.0] - 2026-03-16
+
+### Added
+- `skills/` directory in harness — modern multi-file skill format with `SKILL.md` + `references/`
+- 11 skills migrated from orphaned `~/.claude/skills/` into harness management
+- `tla-spec` skill — TLA+ formal verification for state machines (generate, verify, audit, drift)
+- `tla-verifier` agent — TLC model checker runner (Sonnet, 40 turns)
+- Post-commit hook auto-runs `install.sh` after every harness commit
+
+### Changed
+- `install.sh` now handles `skills/` directory symlinks to `~/.claude/skills/`
+- `/agent-reverse install` writes to harness first, then symlinks (never directly to `~/.claude/`)
+
+### Fixed
+- 14 duplicate skills (same skill in both `commands/` and `skills/`) removed
+- 25 orphaned skills in `~/.claude/skills/` that weren't backed up to git
+
 ## [1.0.0] - 2026-03-16
 
 ### Added
