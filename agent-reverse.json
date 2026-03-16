@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "name": "shihwesleys-harness",
+  "description": "Claude Code harness — skills, agents, hooks, scripts, skill graphs",
+  "repo": "shihwesley/shihwesleys-harness",
+  "backup": {
+    "target": "repo",
+    "repo": "shihwesley/shihwesleys-harness",
+    "branch": "main",
+    "auto_backup": false
+  },
+  "related": [
+    {
+      "name": "shihwesley-plugins",
+      "repo": "shihwesley/shihwesley-plugins",
+      "type": "plugins",
+      "manages": ["commands/release.md"]
+    }
+  ],
+  "categories": {
+    "commands": {
+      "path": "commands/",
+      "target": "~/.claude/commands/",
+      "count": 41
+    },
+    "agents": {
+      "path": "agents/",
+      "target": "~/.claude/agents/",
+      "count": 7
+    },
+    "scripts": {
+      "path": "scripts/",
+      "target": "~/.claude/scripts/",
+      "count": 9
+    },
+    "hooks": {
+      "path": "hooks/",
+      "target": "~/.claude/hooks/",
+      "count": 21
+    },
+    "graphs": {
+      "path": "graphs/",
+      "target": "~/Source/.claude/docs/",
+      "count": 19
+    }
+  }
+}
