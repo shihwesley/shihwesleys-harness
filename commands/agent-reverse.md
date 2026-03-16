@@ -98,14 +98,20 @@ Install a capability from a previously analyzed source.
 4. **Determine user-invocable status:**
    - Source has `user-invocable: true` → install as `/command`
    - Source doesn't specify → ask: "Install as `/command` or agent-only skill?"
-5. Call `install_capability` with appropriate settings
-6. Report: files written, directory, whether `/command` is available
+5. **Write to harness first** (MANDATORY):
+   - Single-file skills → `~/Source/shihwesleys-harness/commands/<name>.md`
+   - Multi-file skills (with references/) → `~/Source/shihwesleys-harness/skills/<name>/SKILL.md`
+   - Agents → `~/Source/shihwesleys-harness/agents/<name>.md`
+   - NEVER write directly to `~/.claude/` — the harness is the source of truth
+6. **Run install.sh** to create symlinks: `bash ~/Source/shihwesleys-harness/install.sh`
+7. Report: files written, directory, whether `/command` is available
 
 **Example (clean install):**
 ```
 User: /agent-reverse install code-review
 You: Security scan: clear (0/10 risk).
-  Installed code-review → .claude/commands/code-review.md
+  Installed code-review → shihwesleys-harness/commands/code-review.md
+  Symlinked to ~/.claude/commands/code-review.md
   Available as /code-review. Added to manifest.
 ```
 

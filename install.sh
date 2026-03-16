@@ -36,6 +36,15 @@ for d in "$HARNESS_DIR"/commands/*/; do
   backup_and_link "$d" "$CLAUDE_DIR/commands/$name"
 done
 
+# --- Skills (modern format: skills/<name>/SKILL.md) ---
+echo "=== Skills (modern) ==="
+mkdir -p "$CLAUDE_DIR/skills"
+for d in "$HARNESS_DIR"/skills/*/; do
+  [ -d "$d" ] || continue
+  name=$(basename "$d")
+  backup_and_link "$d" "$CLAUDE_DIR/skills/$name"
+done
+
 # --- Agents ---
 echo "=== Agents ==="
 mkdir -p "$CLAUDE_DIR/agents"
