@@ -175,18 +175,39 @@ You: Capabilities: 2 outdated (code-review, test-runner).
 
 Create a backup of all capabilities, skills, and configs.
 
-**Steps:**
-1. Call `backup_create` with options:
-   - No options: saves to `agent-reverse-backup-<date>.json`
-   - `--gist`: upload to GitHub Gist (private by default)
-   - `--gist --public`: upload as public gist
-   - `--repo owner/name`: push to GitHub repo
-2. Report backup location and file count
+**Primary backup target:** `shihwesley/shihwesleys-harness` (git repo at `~/Source/shihwesleys-harness/`).
 
-**Example:**
+**Steps:**
+1. Default (no options or `--harness`): commit and push changes in `~/Source/shihwesleys-harness/`
+   - `cd ~/Source/shihwesleys-harness`
+   - `git add -A && git status` — show what changed
+   - Commit with conventional commit message based on changes
+   - `git push`
+2. `--gist`: upload snapshot to GitHub Gist (private by default)
+3. `--gist --public`: upload as public gist
+4. `--repo owner/name`: push to a different GitHub repo
+5. Report backup location and file count
+
+**Harness-aware workflow:**
+- The harness repo (`shihwesleys-harness`) is the canonical backup. Edits to skills/agents/hooks/scripts happen there directly (via symlinks).
+- `/agent-reverse backup` without flags = commit + push the harness repo. This is the fast path.
+- Use `--gist` only for point-in-time snapshots or sharing with others.
+
+**Example (default — harness push):**
+```
+User: /agent-reverse backup
+You: 3 files changed in shihwesleys-harness:
+  modified: commands/humanizer.md
+  modified: hooks/session-start-context.sh
+  new: commands/new-skill.md
+Committed: feat(skills): add new-skill, update humanizer
+Pushed to shihwesley/shihwesleys-harness (main).
+```
+
+**Example (gist snapshot):**
 ```
 User: /agent-reverse backup --gist
-You: Backup uploaded: https://gist.github.com/user/abc123 (11 capabilities, 16 files)
+You: Snapshot uploaded: https://gist.github.com/user/abc123 (97 files)
 ```
 
 ### `/agent-reverse restore <source>`
@@ -194,33 +215,40 @@ You: Backup uploaded: https://gist.github.com/user/abc123 (11 capabilities, 16 f
 Restore capabilities from a backup.
 
 **Steps:**
-1. Call `backup_list` to preview contents
-2. Show what will be restored
-3. Call `backup_restore` with options:
-   - `source`: local path, gist URL, or repo URL
+1. Default (no source): clone/pull `shihwesley/shihwesleys-harness` and run `install.sh`
+2. If source is a gist URL or local path: extract and merge
+3. Options:
    - `--merge`: merge with existing (default: replace)
    - `--dry-run`: preview without writing
    - `--target <agent>`: cross-agent restore (claude-code, cursor, antigravity)
 4. Report restored files
 
-**Example:**
+**Example (from harness repo):**
 ```
-User: /agent-reverse restore https://gist.github.com/user/abc123 --target cursor
-You: Cross-agent restore: claude-code → cursor. Restored 8 capabilities.
+User: /agent-reverse restore
+You: Pulled latest shihwesleys-harness. Ran install.sh: 97 symlinks created.
 ```
 
-### `/agent-reverse backup-list <source>`
+**Example (from gist):**
+```
+User: /agent-reverse restore https://gist.github.com/user/abc123
+You: Restored 97 files from gist snapshot.
+```
+
+### `/agent-reverse backup-list [source]`
 
 Preview backup contents without restoring.
 
 **Steps:**
-1. Call `backup_list` with the source path/URL
-2. Display capability list and file count
+1. No source: show current harness repo status (`git status` + file counts)
+2. With source (gist URL, local path): display capability list and file count
 
 **Example:**
 ```
-User: /agent-reverse backup-list ./backup.json
-You: 11 capabilities, 16 files. Created: 2026-01-31.
+User: /agent-reverse backup-list
+You: shihwesleys-harness (v1.0.0): 41 skills, 7 agents, 9 scripts, 21 hooks, 19 graph files.
+  Last commit: 2h ago — feat(skills): add new-skill
+  Clean working tree (no uncommitted changes).
 ```
 
 ## Security Scanning
