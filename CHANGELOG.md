@@ -5,6 +5,17 @@ All notable changes to shihwesleys-harness will be documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/).
 Versioning follows [Conventional Commits](https://www.conventionalcommits.org/) via `/release`.
 
+## [1.2.0] - 2026-03-16
+
+### Added
+- gstack skill pack from `garrytan/gstack` (v1.1.0) — 14 sub-skills: browse, qa, qa-only, qa-design-review, plan-ceo-review, plan-eng-review, plan-design-review, review, ship, document-release, retro, design-consultation, setup-browser-cookies, gstack-upgrade
+- gstack skill graph (8 MOC files) at `graphs/gstack-graph/`
+- Anthropic skill guide audit for all gstack skills
+- Trigger phrases added to 5 gstack skill descriptions (design-consultation, document-release, plan-eng-review, ship, review)
+
+### Fixed
+- `install.sh` graph symlinks now loop all `graphs/*/` directories instead of hardcoding swift-graph and agent-infra-graph
+
 ## [1.1.0] - 2026-03-16
 
 ### Added
