@@ -58,6 +58,11 @@ if [[ "$IS_CACHED_DOC" == false ]]; then
   esac
 fi
 
+# Image files - Claude reads these visually, TLDR can't summarize binary content
+case "$FILE_EXT" in
+  png|jpg|jpeg|gif|bmp|tiff|tif|webp|heic|heif|svg|ico|pdf) exit 0 ;;
+esac
+
 # Test files - need implementation details
 [[ "$FILE_PATH" == *test* ]] && exit 0
 [[ "$FILE_PATH" == *spec* ]] && exit 0
