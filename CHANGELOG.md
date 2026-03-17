@@ -5,6 +5,12 @@ All notable changes to shihwesleys-harness will be documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/).
 Versioning follows [Conventional Commits](https://www.conventionalcommits.org/) via `/release`.
 
+## [1.3.0] - 2026-03-16
+
+### Added
+- `/plan-review-pipeline` command — multi-lens review pipeline bridging `/interactive-planning` and `/orchestrate`
+- `plan-review-pipeline` agent — runs CEO/founder review then eng manager review sequentially on spec files, modifying them in place; optionally extracts state models for TLA verification
+
 ## [1.2.0] - 2026-03-16
 
 ### Added
