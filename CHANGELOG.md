@@ -5,6 +5,14 @@ All notable changes to shihwesleys-harness will be documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/).
 Versioning follows [Conventional Commits](https://www.conventionalcommits.org/) via `/release`.
 
+## [1.4.0] - 2026-03-17
+
+### Added
+- `install.sh` sub-skill promotion — nested skill dirs with their own `SKILL.md` are symlinked as independent top-level skills
+
+### Fixed
+- TLDR read enforcer now bypasses image files (png, jpg, heic, webp, etc.) and PDFs so simulator screenshots and visual assets are read natively by Claude's multimodal reader
+
 ## [1.3.0] - 2026-03-16
 
 ### Added
