@@ -76,14 +76,14 @@ done
 # --- Graphs ---
 # These go into the Source project's .claude/docs/, not ~/.claude/
 echo "=== Skill Graphs ==="
-mkdir -p "$SOURCE_CLAUDE/docs/swift-graph" "$SOURCE_CLAUDE/docs/agent-infra-graph"
-for f in "$HARNESS_DIR"/graphs/swift-graph/*; do
-  [ -f "$f" ] || continue
-  backup_and_link "$f" "$SOURCE_CLAUDE/docs/swift-graph/$(basename "$f")"
-done
-for f in "$HARNESS_DIR"/graphs/agent-infra-graph/*; do
-  [ -f "$f" ] || continue
-  backup_and_link "$f" "$SOURCE_CLAUDE/docs/agent-infra-graph/$(basename "$f")"
+for d in "$HARNESS_DIR"/graphs/*/; do
+  [ -d "$d" ] || continue
+  name=$(basename "$d")
+  mkdir -p "$SOURCE_CLAUDE/docs/$name"
+  for f in "$d"*; do
+    [ -f "$f" ] || continue
+    backup_and_link "$f" "$SOURCE_CLAUDE/docs/$name/$(basename "$f")"
+  done
 done
 
 echo ""
