@@ -43,6 +43,16 @@ for d in "$HARNESS_DIR"/skills/*/; do
   [ -d "$d" ] || continue
   name=$(basename "$d")
   backup_and_link "$d" "$CLAUDE_DIR/skills/$name"
+
+  # Promote sub-skills: if a top-level skill contains subdirectories
+  # with their own SKILL.md, symlink them as independent skills.
+  # e.g. skills/gstack/plan-ceo-review/SKILL.md → ~/.claude/skills/plan-ceo-review/
+  for sub in "$d"*/; do
+    [ -d "$sub" ] || continue
+    [ -f "$sub/SKILL.md" ] || continue
+    subname=$(basename "$sub")
+    backup_and_link "$sub" "$CLAUDE_DIR/skills/$subname"
+  done
 done
 
 # --- Agents ---
